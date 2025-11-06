@@ -82,7 +82,7 @@ export function usePlants() {
   }, [client, address, toast])
 
   // Plant a new seed (simplified - no plant type)
-  const plantSeed = useCallback(async () => {
+  const plantSeed = useCallback(async (quantity: number) => {
     if (!client || !account) {
       toast({
         title: 'Wallet not connected',
@@ -95,7 +95,7 @@ export function usePlants() {
     setLoading(true)
     try {
       // Send transaction and wait for receipt
-      const result = await plantSeedContract(client, account)
+      const result = await plantSeedContract(client, account, quantity)   //tambahkan quantity untuk jumlah seed yang ditanam
 
       toast({
         title: 'Seed planted!',

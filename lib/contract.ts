@@ -14,7 +14,9 @@ import {
   LISK_GARDEN_ABI,
   Plant,
   GrowthStage,
+  DonationLevel,
   STAGE_NAMES,
+  DONATION_LEVEL_NAME,
   PLANT_PRICE,
   HARVEST_REWARD,
   STAGE_DURATION,
@@ -34,22 +36,23 @@ export function parsePlantData(rawPlant: any): Plant {
     plantedDate: BigInt(isArray ? rawPlant[3] ?? 0 : rawPlant.plantedDate ?? 0),
     lastWatered: BigInt(isArray ? rawPlant[4] ?? 0 : rawPlant.lastWatered ?? 0),
     waterLevel: Number(isArray ? rawPlant[5] ?? 0 : rawPlant.waterLevel ?? 0),
-    exists: Boolean(isArray ? rawPlant[6] ?? false : rawPlant.exists ?? false),
-    isDead: Boolean(isArray ? rawPlant[7] ?? false : rawPlant.isDead ?? false),
+    quantity: Number(isArray ? rawPlant[6] ?? 0 : rawPlant.quantity ?? 0),
+    exists: Boolean(isArray ? rawPlant[7] ?? false : rawPlant.exists ?? false),
+    isDead: Boolean(isArray ? rawPlant[8] ?? false : rawPlant.isDead ?? false),
   }
 }
 
 // Contract write functions using Panna SDK
 
-export async function plantSeed(client: any, account: any) {
+export async function plantSeed(client: any, account: any, quantity: number) {
   const tx = prepareContractCall({
     contract: getContract({
       client,
       chain: liskSepolia,
       address: LISK_GARDEN_CONTRACT_ADDRESS,
     }),
-    method: 'function plantSeed() payable returns (uint256)',
-    params: [],
+    method: 'function plantSeed(uint16 quantity) payable returns (uint256)',
+    params: [quantity],
     value: toWei(PLANT_PRICE),
   })
 
