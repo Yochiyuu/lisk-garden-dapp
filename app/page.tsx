@@ -1,5 +1,6 @@
+// "use client"; // Tidak perlu jika hook (useRef) dihapus
 import { TestimonialSlider } from "@/components/TestimonialSlider";
-import { AuroraBackground } from "@/components/ui/aurora-background";
+// import Autoplay from "embla-carousel-autoplay"; // <-- DIHAPUS, tidak perlu di sini
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,16 +15,17 @@ import {
   Gitlab,
   Layers,
   MoveRight,
-  Package,
   Rocket,
   ShieldCheck,
   Target,
   Twitter,
   Users,
   Zap,
+  Package,
 } from "lucide-react";
 import Image from "next/image"; // Import komponen Image dari Next.js
 import Link from "next/link";
+import React from "react"; // <-- Import React ditambahkan untuk file .tsx
 
 const techPartners = [
   // Ini pakai logo
@@ -47,7 +49,19 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 flex flex-col">
-        <AuroraBackground>
+        {/* Hero Section (Dengan Latar Belakang Aurora Halus) */}
+        <section className="w-full min-h-screen flex items-center py-20 relative overflow-hidden">
+          {/* Efek Aurora Background (Opacity disesuaikan untuk tema terang) */}
+          <div className="absolute inset-0 -z-10 opacity-70">
+            {/* Gradien ungu/biru */}
+            <div className="absolute left-[10%] top-[10%] h-[400px] w-[400px] rounded-full bg-gradient-radial from-primary/10 to-transparent blur-[128px] animate-aurora" />
+            {/* Gradien pink/magenta */}
+            <div
+              className="absolute right-[10%] bottom-[5%] h-[400px] w-[400px] rounded-full bg-gradient-radial from-accent/10 to-transparent blur-[128px] animate-aurora"
+              style={{ animationDelay: "10s" }}
+            />
+          </div>
+
           <div className="container px-4 md:px-6 mx-auto">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:gap-24 items-center">
               <div className="flex flex-col justify-center space-y-6 animate-slide-in-up">
@@ -88,8 +102,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </AuroraBackground>
-        {/* ======================================================== */}
+        </section>
 
         {/* Features Section (Kartu Putih Bersih) */}
         <section id="features" className="w-full py-16 md:py-24 bg-muted/50">
@@ -354,6 +367,8 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+        
+        {/* Panggilan ke TestimonialSlider sudah benar */}
         <TestimonialSlider />
       </main>
 
