@@ -44,7 +44,7 @@ export default function CreateProjectModal({ isOpen, onClose }: CreateProjectMod
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="title">Judul Proyek</Label>
-              <Input id="title" placeholder="Contoh: Dompet Web3 Revolusioner" />
+              <Input id="title" placeholder="Contoh: Donasi Pohon Jakarta" />
             </div>
             <div className="space-y-2">
               <Label>Kuantitas</Label>
