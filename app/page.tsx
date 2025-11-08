@@ -20,16 +20,16 @@ import {
 import Image from "next/image"; // Import komponen Image dari Next.js
 import Link from "next/link";
 
-// Definisikan partner/teknologi di sini agar mudah di-map
 const techPartners = [
-  // Tambahkan logoSrc untuk setiap partner
-  { name: "Lisk", id: "lisk", logoSrc: "/logos/lisk.svg"},
-  { name: "Sepolia", id: "sepolia", logoSrc: "/logos/sepolia.svg" },
-  { name: "Ethereum", id: "eth", logoSrc: "/logos/ethereum.svg" },
-  { name: "Solidity", id: "solidity", logoSrc: "/logos/solidity.svg" },
+  // Ini pakai logo
+  { name: "Lisk", id: "lisk", logoSrc: null },
+  { name: "Sepolia", id: "sepolia", logoSrc: null },
+  { name: "Ethereum", id: "eth", logoSrc: null },
   { name: "Next.js", id: "nextjs", logoSrc: "/logos/nextjs.svg" },
   { name: "Vercel", id: "vercel", logoSrc: "/logos/vercel.svg" },
   { name: "Thirdweb", id: "thirdweb", logoSrc: "/logos/thirdweb.svg" },
+  { name: "Solidity", id: "solidity", logoSrc: null },
+  { name: "PannaSDK", id: "panna", logoSrc: null },
 ];
 
 export default function HomePage() {
@@ -178,32 +178,58 @@ export default function HomePage() {
               }}
             >
               <div className="flex w-max animate-marquee-infinite">
+                {/* Loop Pertama */}
                 {techPartners.map((partner) => (
-                  <div key={partner.id} className="mx-10 flex-shrink-0">
-                    {/* Mengganti h2 dengan komponen Image dari Next.js */}
-                    <Image
-                      src={partner.logoSrc}
-                      alt={`${partner.name} Logo`}
-                      width={100} // <-- Diseragamkan
-                      height={32} // <-- Disesuaikan dengan h-8
-                      className="h-8 w-auto object-contain transition-all duration-300 hover:scale-105" // <-- DIUBAH DARI h-10
-                    />
+                  <div
+                    key={partner.id}
+                    // --- PERUBAHAN DI SINI ---
+                    // w-32 (128px) ditambahkan untuk memberi lebar seragam
+                    // w-auto dihapus dari <Image>
+                    className="mx-10 flex h-8 w-32 flex-shrink-0 items-center justify-center"
+                  >
+                    {partner.logoSrc ? (
+                      // JIKA ADA LOGO: Tampilkan Gambar
+                      <Image
+                        src={partner.logoSrc}
+                        alt={`${partner.name} Logo`}
+                        width={128} // Samakan dengan w-32 (atau biarkan 100)
+                        height={32} // Samakan dengan h-8
+                        // h-full dan w-full agar mengisi "kotak"
+                        // object-contain menjaga rasio aspek
+                        className="h-full w-full object-contain transition-all duration-300 hover:scale-105"
+                      />
+                    ) : (
+                      // JIKA TIDAK ADA LOGO: Tampilkan Teks
+                      <span className="w-full text-center text-2xl font-medium text-muted-foreground transition-all duration-300 hover:scale-105">
+                        {partner.name}
+                      </span>
+                    )}
                   </div>
                 ))}
-                {/* Duplikasi untuk efek marquee yang mulus */}
+
+                {/* Loop Duplikat (Wajib diubah juga) */}
                 {techPartners.map((partner) => (
                   <div
                     key={`${partner.id}-dup`}
-                    className="mx-10 flex-shrink-0"
+                    // --- PERUBAHAN DI SINI ---
+                    className="mx-10 flex h-8 w-32 flex-shrink-0 items-center justify-center"
                     aria-hidden="true"
                   >
-                    <Image
-                      src={partner.logoSrc}
-                      alt={`${partner.name} Logo`}
-                      width={100} // <-- Diseragamkan
-                      height={32} // <-- Disesuaikan dengan h-8
-                      className="h-8 w-auto object-contain transition-all duration-300 hover:scale-105" // <-- DIUBAH DARI h-10
-                    />
+                    {partner.logoSrc ? (
+                      // JIKA ADA LOGO: Tampilkan Gambar
+                      <Image
+                        src={partner.logoSrc}
+                        alt={`${partner.name} Logo`}
+                        width={128}
+                        height={32}
+                        className="h-full w-full object-contain transition-all duration-300 hover:scale-105"
+                      />
+                    ) : (
+                      // JIKA TIDAK ADA LOGO: Tampilkan Teks
+                      <span className="w-full text-center text-2xl font-medium text-muted-foreground transition-all duration-300 hover:scale-105">
+                        {partner.name}
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>

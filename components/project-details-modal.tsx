@@ -31,14 +31,14 @@ const STAGE_EMOJIS = {
   [ProjectStage.SEED]: "💡", // FUNDING
   [ProjectStage.SPROUT]: "🚀", // SUCCESSFUL
   [ProjectStage.GROWING]: "⌛", // EXPIRED (logika lama, bisa diubah)
-  [ProjectStage.BLOOMING]: "✅", // CLAIMED
+  [ProjectStage.ADULT]: "✅", // CLAIMED
 }
 
 const STAGE_BACKGROUNDS = {
   [ProjectStage.SEED]: "from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950",
   [ProjectStage.SPROUT]: "from-green-50 to-lime-50 dark:from-green-950 dark:to-lime-950",
   [ProjectStage.GROWING]: "from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950",
-  [ProjectStage.BLOOMING]: "from-emerald-50 to-teal-50 dark:from-emerald-950 dark:to-teal-950",
+  [ProjectStage.ADULT]: "from-emerald-50 to-teal-50 dark:from-emerald-950 dark:to-teal-950",
 }
 
 
@@ -104,6 +104,10 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: Projec
           {/* Info Proyek */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-muted-foreground">Quantity</span>
+              <span className="text-sm font-semibold text-foreground capitalize">{project.quantity}</span>
+            </div>
+            <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-muted-foreground">Status</span>
               <span className="text-sm font-semibold text-foreground capitalize">{stageKey}</span>
             </div>
@@ -137,7 +141,7 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: Projec
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <Clock className={`w-4 h-4 ${isExpired ? 'text-gray-400' : 'text-blue-500'}`} />
-                Sisa Waktu (Demo)
+                Water Level
               </span>
               {/* Ini menggunakan waterLevel sbg sisa waktu */}
               <span className="text-sm font-semibold text-foreground">{currentFunding}%</span>
@@ -155,7 +159,7 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: Projec
           </div>
 
           {/* Stage sync warning (Biarkan) */}
-          {!isExpired && stageOutOfSync && (
+          {/* {!isExpired && stageOutOfSync && (
             <Card className="p-4 bg-linear-to-br from-orange-500/10 to-yellow-500/10 border-orange-500/30">
                 <div className="text-center space-y-1">
                   <p className="font-semibold text-foreground flex items-center justify-center gap-2">
@@ -188,7 +192,7 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: Projec
                   )}
                 </Button>
             </Card>
-          )}
+          )} */}
 
           {/* Info Klaim Dana (Pengganti Harvest) */}
           {canClaim && (
@@ -250,7 +254,7 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: Projec
                     ) : (
                       <>
                         <Sparkles className="w-4 h-4" />
-                        Klaim Dana
+                        Klaim NFT
                       </>
                     )}
                   </Button>
