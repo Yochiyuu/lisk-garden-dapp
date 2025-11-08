@@ -126,13 +126,13 @@ export default function ProjectDetailsModal({ project, isOpen, onClose }: Projec
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <Target className="w-4 h-4 text-primary" />
-                Target Pendanaan
+                Plant Progress
               </span>
               <span className="text-sm font-semibold text-foreground">{Math.floor(progress)}%</span>
             </div>
             <Progress value={progress} className="h-3" />
             <p className="text-xs text-muted-foreground">
-              Target: {HARVEST_REWARD} ETH. {currentFunding}% tercapai.
+              {/* Target: {HARVEST_REWARD} ETH. {currentFunding}% tercapai. */}
             </p>
           </div>
 
