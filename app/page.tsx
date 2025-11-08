@@ -1,3 +1,5 @@
+import { TestimonialSlider } from "@/components/TestimonialSlider";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,14 +9,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  DollarSign,
   Github,
   Gitlab,
   Layers,
   MoveRight,
+  Package,
   Rocket,
   ShieldCheck,
   Target,
   Twitter,
+  Users,
   Zap,
 } from "lucide-react";
 import Image from "next/image"; // Import komponen Image dari Next.js
@@ -32,23 +37,17 @@ const techPartners = [
   { name: "PannaSDK", id: "panna", logoSrc: null },
 ];
 
+const globalStats = {
+  totalRaised: "125 ETH",
+  totalBackers: 893,
+  totalProjects: 42,
+};
+
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 flex flex-col">
-        {/* Hero Section (Dengan Latar Belakang Aurora Halus) */}
-        <section className="w-full min-h-screen flex items-center py-20 relative overflow-hidden">
-          {/* Efek Aurora Background (Opacity disesuaikan untuk tema terang) */}
-          <div className="absolute inset-0 -z-10 opacity-70">
-            {/* Gradien ungu/biru */}
-            <div className="absolute left-[10%] top-[10%] h-[400px] w-[400px] rounded-full bg-gradient-radial from-primary/10 to-transparent blur-[128px] animate-aurora" />
-            {/* Gradien pink/magenta */}
-            <div
-              className="absolute right-[10%] bottom-[5%] h-[400px] w-[400px] rounded-full bg-gradient-radial from-accent/10 to-transparent blur-[128px] animate-aurora"
-              style={{ animationDelay: "10s" }}
-            />
-          </div>
-
+        <AuroraBackground>
           <div className="container px-4 md:px-6 mx-auto">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:gap-24 items-center">
               <div className="flex flex-col justify-center space-y-6 animate-slide-in-up">
@@ -89,7 +88,8 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+        </AuroraBackground>
+        {/* ======================================================== */}
 
         {/* Features Section (Kartu Putih Bersih) */}
         <section id="features" className="w-full py-16 md:py-24 bg-muted/50">
@@ -157,6 +157,80 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* ===== SECTION STATISTIK GLOBAL ===== */}
+        <section
+          id="global-stats"
+          className="w-full py-16 md:py-24 bg-background"
+        >
+          <div className="container px-4 md:px-6 mx-auto">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                Pencapaian Platform
+              </h2>
+              <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Didukung oleh komunitas yang transparan dan kuat.
+              </p>
+            </div>
+
+            <div className="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-3">
+              {/* Stat 1: Total Dana */}
+              <Card className="bg-card shadow-sm hover:shadow-lg transition-shadow">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    Total Dana Terkumpul
+                  </CardTitle>
+                  <DollarSign className="h-5 w-5 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">
+                    {globalStats.totalRaised}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Terkumpul di seluruh platform
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Stat 2: Total Proyek */}
+              <Card className="bg-card shadow-sm hover:shadow-lg transition-shadow">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    Total Proyek
+                  </CardTitle>
+                  <Package className="h-5 w-5 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">
+                    {globalStats.totalProjects}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Proyek telah dibuat
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Stat 3: Total Donatur */}
+              <Card className="bg-card shadow-sm hover:shadow-lg transition-shadow">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    Total Donatur Unik
+                  </CardTitle>
+                  <Users className="h-5 w-5 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">
+                    +{globalStats.totalBackers}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Orang telah berpartisipasi
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+        {/* ======================================= */}
 
         {/* Slider Teknologi */}
         <section
@@ -280,6 +354,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+        <TestimonialSlider />
       </main>
 
       {/* Footer (Dengan Latar Belakang Baru) */}
