@@ -1,31 +1,26 @@
-// "use client"; // Tidak perlu jika hook (useRef) dihapus
+// "use client" // Diperlukan untuk hook (useCallback) dan partikel
+"use client";
+
 import { TestimonialSlider } from "@/components/TestimonialSlider";
-// import Autoplay from "embla-carousel-autoplay"; // <-- DIHAPUS, tidak perlu di sini
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   DollarSign,
   Github,
   Gitlab,
-  Layers,
-  MoveRight,
-  Rocket,
+  HandCoins,
+  Package, // Ikon untuk "Buat"
   ShieldCheck,
   Target,
   Twitter,
-  Users,
+  Users, // Ikon untuk "Donasi"
+  Wallet,
   Zap,
-  Package,
 } from "lucide-react";
-import Image from "next/image"; // Import komponen Image dari Next.js
+import Image from "next/image";
 import Link from "next/link";
-import React from "react"; // <-- Import React ditambahkan untuk file .tsx
+
+// Import untuk Partikel
 
 const techPartners = [
   // Ini pakai logo
@@ -49,62 +44,193 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 flex flex-col">
-        {/* Hero Section (Dengan Latar Belakang Aurora Halus) */}
-        <section className="w-full min-h-screen flex items-center py-20 relative overflow-hidden">
-          {/* Efek Aurora Background (Opacity disesuaikan untuk tema terang) */}
-          <div className="absolute inset-0 -z-10 opacity-70">
-            {/* Gradien ungu/biru */}
-            <div className="absolute left-[10%] top-[10%] h-[400px] w-[400px] rounded-full bg-gradient-radial from-primary/10 to-transparent blur-[128px] animate-aurora" />
-            {/* Gradien pink/magenta */}
-            <div
-              className="absolute right-[10%] bottom-[5%] h-[400px] w-[400px] rounded-full bg-gradient-radial from-accent/10 to-transparent blur-[128px] animate-aurora"
-              style={{ animationDelay: "10s" }}
-            />
-          </div>
+        {/* ===== SECTION 1: HERO ===== */}
+        <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
+          {/* Konten */}
+          <div className="container px-4 mx-auto">
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              {/* Kiri: Teks & CTA */}
+              <div className="space-y-8 text-center lg:text-left animate-fade-in">
+                <h1 className="text-5xl font-extrabold sm:text-6xl xl:text-7xl bg-gradient-to-br from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_2px_40px_rgba(99,102,241,0.25)]">
+                  Donasi Taman Indonesia.
+                </h1>
 
-          <div className="container px-4 md:px-6 mx-auto">
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:gap-24 items-center">
-              <div className="flex flex-col justify-center space-y-6 animate-slide-in-up">
-                <div className="space-y-4">
-                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-7xl/none text-foreground">
-                    Donasi Taman Indonesia.
-                  </h1>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Selamat datang di Domain, platform crowdfunding transparan
-                    yang dibangun di atas Lisk Blockchain. Wujudkan ide Anda
-                    atau dukung inovator berikutnya.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-3 sm:flex-row">
+                <p className="text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0">
+                  Platform crowdfunding transparan berbasis Lisk Blockchain
+                  dengan smart contract otomatis.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Button
                     size="lg"
                     asChild
-                    className="shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow"
+                    className="px-8 py-6 text-lg neon-button"
                   >
-                    <Link href="/crowdfund">
-                      <Rocket className="mr-2 h-5 w-5" />
-                      Mulai Jelajahi
-                    </Link>
+                    <Link href="/crowdfund">🚀 Luncurkan App</Link>
                   </Button>
-                  <Button size="lg" variant="outline" asChild>
-                    <Link href="#features" className="group">
-                      Pelajari Fitur
-                      <MoveRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    </Link>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    asChild
+                    className="px-8 py-6 text-lg glass-outline"
+                  >
+                    <Link href="#features">Pelajari Fitur →</Link>
                   </Button>
                 </div>
               </div>
-              <div
-                className="flex justify-center animate-slide-in-up"
-                style={{ animationDelay: "0.2s" }}
-              >
-                <Layers className="w-48 h-48 lg:w-72 lg:h-72 text-primary animate-float" />
+
+              {/* ... (kode di atas tidak berubah) */}
+
+              {/* Kanan: Statistik (Menggantikan Ikon) */}
+              <div className="flex justify-center animate-fade-in-delay">
+                {/* Kartu Statistik Glassmorphism (Diperbarui dengan Tema Biru/Cyan) */}
+                <div
+                  className="
+            grid grid-cols-1 gap-6 w-full max-w-md p-0.5 // P-0.5 untuk border tipis gradien
+            bg-gradient-to-br from-indigo-500/50 via-cyan-500/50 to-indigo-500/50 // Gradien border: Indigo -> Cyan -> Indigo
+            rounded-2xl shadow-xl
+            relative overflow-hidden
+            group 
+            before:content-[''] before:absolute before:inset-0 before:p-px before:rounded-[inherit] before:bg-gradient-to-br before:from-indigo-400 before:via-cyan-400 before:to-indigo-400 // Gradien hover: Indigo -> Cyan -> Indigo (Lebih Terang)
+            before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500
+          "
+                >
+                  <div
+                    className="
+              relative z-10
+              grid grid-cols-1 gap-6 w-full bg-background/70 backdrop-blur-xl rounded-2xl p-6
+              border border-white/5
+              transition-all duration-300
+              group-hover:scale-[0.99] group-hover:shadow-neon-blue // Shadow neon BIRU
+            "
+                  >
+                    {/* Kartu Stat 1 */}
+                    <div className="flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-background/50 to-background/30 border border-border/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:-translate-y-1">
+                      <div className="p-3 rounded-full bg-gradient-to-br from-primary/30 to-cyan-500/30 shadow-md">
+                        {" "}
+                        {/* Latar ikon: Primary -> Cyan */}
+                        <DollarSign className="w-7 h-7 text-cyan-400 drop-shadow-[0_0_8px_rgba(22,163,221,0.7)]" />{" "}
+                        {/* Ikon & shadow glow BIRU (Cyan-500 RGB) */}
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">
+                          Total Dana Terkumpul
+                        </p>
+                        <p className="text-3xl font-bold text-foreground">
+                          {globalStats.totalRaised}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Kartu Stat 2 */}
+                    <div className="flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-background/50 to-background/30 border border-border/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:-translate-y-1">
+                      <div className="p-3 rounded-full bg-gradient-to-br from-primary/30 to-cyan-500/30 shadow-md">
+                        <Users className="w-7 h-7 text-cyan-400 drop-shadow-[0_0_8px_rgba(22,163,221,0.7)]" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">
+                          Total Donatur
+                        </p>
+                        <p className="text-3xl font-bold text-foreground">
+                          {globalStats.totalBackers}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Kartu Stat 3 */}
+                    <div className="flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-background/50 to-background/30 border border-border/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:-translate-y-1">
+                      <div className="p-3 rounded-full bg-gradient-to-br from-primary/30 to-cyan-500/30 shadow-md">
+                        <Package className="w-7 h-7 text-cyan-400 drop-shadow-[0_0_8px_rgba(22,163,221,0.7)]" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">
+                          Total Proyek
+                        </p>
+                        <p className="text-3xl font-bold text-foreground">
+                          {globalStats.totalProjects}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ... (kode di bawah tidak berubah) */}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== SECTION 2: TECH PARTNERS (Slider Teknologi) ===== */}
+        {/* Dipindahkan ke atas untuk membangun kepercayaan */}
+        <section
+          id="tech-slider"
+          className="w-full py-16 md:py-24 bg-background"
+        >
+          <div className="container px-4 md:px-6 mx-auto">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-muted-foreground">
+                Didukung oleh Teknologi Terkini
+              </h2>
+            </div>
+
+            <div
+              className="relative flex overflow-hidden"
+              style={{
+                maskImage:
+                  "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+              }}
+            >
+              <div className="flex w-max animate-marquee-infinite">
+                {/* Loop Pertama */}
+                {techPartners.map((partner) => (
+                  <div
+                    key={partner.id}
+                    className="mx-10 flex h-8 w-32 flex-shrink-0 items-center justify-center"
+                  >
+                    {partner.logoSrc ? (
+                      <Image
+                        src={partner.logoSrc}
+                        alt={`${partner.name} Logo`}
+                        width={128}
+                        height={32}
+                        className="h-full w-full object-contain transition-all duration-300 hover:scale-105"
+                      />
+                    ) : (
+                      <span className="w-full text-center text-2xl font-medium text-muted-foreground transition-all duration-300 hover:scale-105">
+                        {partner.name}
+                      </span>
+                    )}
+                  </div>
+                ))}
+
+                {/* Loop Duplikat */}
+                {techPartners.map((partner) => (
+                  <div
+                    key={`${partner.id}-dup`}
+                    className="mx-10 flex h-8 w-32 flex-shrink-0 items-center justify-center"
+                    aria-hidden="true"
+                  >
+                    {partner.logoSrc ? (
+                      <Image
+                        src={partner.logoSrc}
+                        alt={`${partner.name} Logo`}
+                        width={128}
+                        height={32}
+                        className="h-full w-full object-contain transition-all duration-300 hover:scale-105"
+                      />
+                    ) : (
+                      <span className="w-full text-center text-2xl font-medium text-muted-foreground transition-all duration-300 hover:scale-105">
+                        {partner.name}
+                      </span>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Features Section (Kartu Putih Bersih) */}
+        {/* ===== SECTION 3: FEATURES ===== */}
         <section id="features" className="w-full py-16 md:py-24 bg-muted/50">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
@@ -171,208 +297,102 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ===== SECTION STATISTIK GLOBAL ===== */}
+        {/* ===== SECTION 4: HOW IT WORKS (Menggantikan About) ===== */}
         <section
-          id="global-stats"
+          id="how-it-works"
           className="w-full py-16 md:py-24 bg-background"
         >
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+              <div className="inline-block rounded-lg bg-primary/20 px-3 py-1 text-sm font-medium text-primary">
+                Cara Kerja
+              </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Pencapaian Platform
+                Mulai dalam 3 Langkah Mudah
               </h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Didukung oleh komunitas yang transparan dan kuat.
+                Proses kami dirancang agar sederhana dan aman, didukung penuh
+                oleh smart contract.
               </p>
             </div>
 
             <div className="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-3">
-              {/* Stat 1: Total Dana */}
-              <Card className="bg-card shadow-sm hover:shadow-lg transition-shadow">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Total Dana Terkumpul
-                  </CardTitle>
-                  <DollarSign className="h-5 w-5 text-muted-foreground" />
+              {/* Step 1 */}
+              <Card className="bg-card shadow-sm hover:shadow-lg transition-shadow text-center">
+                <CardHeader>
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
+                    <Package className="h-8 w-8 text-primary" />
+                  </div>
+                  <CardTitle className="text-xl">1. Buat Proyek</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold">
-                    {globalStats.totalRaised}
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    Terkumpul di seluruh platform
+                  <p className="text-muted-foreground">
+                    Jelaskan ide Anda, tentukan target pendanaan, dan atur batas
+                    waktu. Luncurkan kampanye Anda di blockchain.
                   </p>
                 </CardContent>
               </Card>
 
-              {/* Stat 2: Total Proyek */}
-              <Card className="bg-card shadow-sm hover:shadow-lg transition-shadow">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Total Proyek
-                  </CardTitle>
-                  <Package className="h-5 w-5 text-muted-foreground" />
+              {/* Step 2 */}
+              <Card className="bg-card shadow-sm hover:shadow-lg transition-shadow text-center">
+                <CardHeader>
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
+                    <HandCoins className="h-8 w-8 text-primary" />
+                  </div>
+                  <CardTitle className="text-xl">2. Beri Dukungan</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold">
-                    {globalStats.totalProjects}
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    Proyek telah dibuat
+                  <p className="text-muted-foreground">
+                    Jelajahi proyek dan beri donasi ke ide yang Anda sukai. Dana
+                    Anda disimpan dengan aman di smart contract.
                   </p>
                 </CardContent>
               </Card>
 
-              {/* Stat 3: Total Donatur */}
-              <Card className="bg-card shadow-sm hover:shadow-lg transition-shadow">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Total Donatur Unik
-                  </CardTitle>
-                  <Users className="h-5 w-5 text-muted-foreground" />
+              {/* Step 3 */}
+              <Card className="bg-card shadow-sm hover:shadow-lg transition-shadow text-center">
+                <CardHeader>
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4">
+                    <Wallet className="h-8 w-8 text-primary" />
+                  </div>
+                  <CardTitle className="text-xl">3. Capai Target</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold">
-                    +{globalStats.totalBackers}
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    Orang telah berpartisipasi
+                  <p className="text-muted-foreground">
+                    Jika target tercapai, dana akan otomatis cair ke kreator.
+                    Jika tidak, dana akan dikembalikan ke donatur.
                   </p>
                 </CardContent>
               </Card>
             </div>
           </div>
         </section>
-        {/* ======================================= */}
 
-        {/* Slider Teknologi */}
-        <section
-          id="tech-slider"
-          className="w-full py-16 md:py-24 bg-background"
-        >
-          <div className="container px-4 md:px-6 mx-auto">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-muted-foreground">
-                Didukung oleh Teknologi Terkini
-              </h2>
-            </div>
-
-            <div
-              className="relative flex overflow-hidden"
-              style={{
-                maskImage:
-                  "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-              }}
-            >
-              <div className="flex w-max animate-marquee-infinite">
-                {/* Loop Pertama */}
-                {techPartners.map((partner) => (
-                  <div
-                    key={partner.id}
-                    // --- PERUBAHAN DI SINI ---
-                    // w-32 (128px) ditambahkan untuk memberi lebar seragam
-                    // w-auto dihapus dari <Image>
-                    className="mx-10 flex h-8 w-32 flex-shrink-0 items-center justify-center"
-                  >
-                    {partner.logoSrc ? (
-                      // JIKA ADA LOGO: Tampilkan Gambar
-                      <Image
-                        src={partner.logoSrc}
-                        alt={`${partner.name} Logo`}
-                        width={128} // Samakan dengan w-32 (atau biarkan 100)
-                        height={32} // Samakan dengan h-8
-                        // h-full dan w-full agar mengisi "kotak"
-                        // object-contain menjaga rasio aspek
-                        className="h-full w-full object-contain transition-all duration-300 hover:scale-105"
-                      />
-                    ) : (
-                      // JIKA TIDAK ADA LOGO: Tampilkan Teks
-                      <span className="w-full text-center text-2xl font-medium text-muted-foreground transition-all duration-300 hover:scale-105">
-                        {partner.name}
-                      </span>
-                    )}
-                  </div>
-                ))}
-
-                {/* Loop Duplikat (Wajib diubah juga) */}
-                {techPartners.map((partner) => (
-                  <div
-                    key={`${partner.id}-dup`}
-                    // --- PERUBAHAN DI SINI ---
-                    className="mx-10 flex h-8 w-32 flex-shrink-0 items-center justify-center"
-                    aria-hidden="true"
-                  >
-                    {partner.logoSrc ? (
-                      // JIKA ADA LOGO: Tampilkan Gambar
-                      <Image
-                        src={partner.logoSrc}
-                        alt={`${partner.name} Logo`}
-                        width={128}
-                        height={32}
-                        className="h-full w-full object-contain transition-all duration-300 hover:scale-105"
-                      />
-                    ) : (
-                      // JIKA TIDAK ADA LOGO: Tampilkan Teks
-                      <span className="w-full text-center text-2xl font-medium text-muted-foreground transition-all duration-300 hover:scale-105">
-                        {partner.name}
-                      </span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* About Section */}
-        <section id="about" className="w-full py-16 md:py-24 bg-muted/50">
-          <div className="container grid items-center gap-10 px-4 md:px-6 lg:grid-cols-2 lg:gap-16 mx-auto">
-            <div className="space-y-4">
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                Tentang Domain
-              </h2>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Domain adalah bukti konsep (PoC) yang menunjukkan bagaimana
-                aplikasi crowdfunding dapat dibangun di atas jaringan Lisk.
-                Proyek ini mendemonstrasikan penggunaan kontrak pintar untuk
-                mengelola kampanye pendanaan, kontribusi, dan pencairan dana
-                secara otomatis dan aman.
-              </p>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Tujuan kami adalah memberdayakan kreator dengan memberi mereka
-                alat untuk mengumpulkan dana tanpa perantara yang mahal.
-              </p>
-            </div>
-
-            {/* Kartu CTA dengan Border Gradien (Aksen baru) */}
-            <div className="flex justify-center">
-              <div className="w-full max-w-md rounded-xl bg-gradient-to-br from-primary via-accent to-primary/50 p-1 transition-all hover:shadow-lg hover:shadow-primary/20">
-                <Card className="w-full bg-card">
-                  <CardHeader>
-                    <CardTitle>Mulai Sekarang</CardTitle>
-                    <CardDescription>
-                      Siap untuk memulai perjalanan Anda?
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="grid gap-4">
-                    <Button size="lg" asChild>
-                      <Link href="/crowdfund">Jelajahi Proyek</Link>
-                    </Button>
-                    <p className="text-xs text-center text-muted-foreground">
-                      Atau buat proyek Anda sendiri (setelah terhubung).
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Panggilan ke TestimonialSlider sudah benar */}
+        {/* ===== SECTION 5: TESTIMONIALS ===== */}
         <TestimonialSlider />
+
+        {/* ===== SECTION 6: FINAL CTA ===== */}
+        <section id="cta" className="w-full py-20 md:py-32 bg-muted/50">
+          <div className="container px-4 md:px-6 mx-auto text-center">
+            <h2 className="text-3xl font-extrabold tracking-tighter sm:text-5xl xl:text-6xl mb-6">
+              Siap Membangun Masa Depan?
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+              Jelajahi proyek inovatif atau mulai kampanye Anda sendiri hari
+              ini. Bergabunglah dengan revolusi crowdfunding yang transparan.
+            </p>
+            <Button
+              size="lg"
+              asChild
+              className="px-10 py-7 text-xl neon-button"
+            >
+              <Link href="/crowdfund">🚀 Luncurkan App Sekarang</Link>
+            </Button>
+          </div>
+        </section>
       </main>
 
-      {/* Footer (Dengan Latar Belakang Baru) */}
+      {/* ===== FOOTER ===== */}
       <footer className="w-full bg-card border-t border-border py-12 md:py-16">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -424,7 +444,7 @@ export default function HomePage() {
                   Buat Proyek
                 </Link>
                 <Link
-                  href="#"
+                  href="#how-it-works"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   prefetch={false}
                 >
@@ -437,7 +457,7 @@ export default function HomePage() {
               <h4 className="font-semibold text-foreground mb-4">Perusahaan</h4>
               <nav className="flex flex-col gap-3">
                 <Link
-                  href="#about"
+                  href="#how-it-works"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   prefetch={false}
                 >
